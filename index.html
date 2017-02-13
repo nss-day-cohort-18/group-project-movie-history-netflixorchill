@@ -5,15 +5,69 @@
 	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 </head>
 <body>
+
+	<!-- Here is the navbar. -->
+	<!-- We use Materialize modals for the navlinks. The <a>Links</a> serve
+	as triggers for the modals. -->
 	<nav>
 	    <div class="nav-wrapper">
 			<a href="#" class="brand-logo">Logo</a>
 			<ul id="nav-mobile" class="right hide-on-med-and-down">
 				<li><a class="waves-effect waves-light btn" href="#modal-find-omdb-movies">Find a chill movie</a></li>
 				<li><a class="waves-effect waves-light btn" href="#modal-search-own-movies">Search my chill movies</a></li>
-				<li><a href="collapsible.html">JavaScript</a></li>
+				<li><a href="waves-effect waves-light btn" href="#modal-login">Login</a></li>
+				<li><a href="waves-effect waves-light btn" href="#modal-register-general">Register</a></li>
 			</ul>
 	    </div>
 	</nav>
+
+	<!-- Here is where we define all of our modals. -->
+	<div id="modal-wrapper">
+
+		<!-- OMDB api call modal -->
+		<div id="modal-find-omdb-movies" class="hidden">
+			Title:
+			<input type="text" name="" value="" placeholder="required">
+			Year:
+			<input type="text" name="" value="" placeholder="optional">
+			<button class="btn">Submit</button>
+		</div>
+
+		<!-- Firebase call modal -->
+		<div id="modal-search-own-movies" class="hidden">
+
+		</div>
+
+		<!-- Login user modal -->
+		<div id="modal-login" class="hidden">
+			Email:
+			<input type="email" name="" value="" placeholder="">
+			Password:
+			<input type="text" name="" value="" placeholder="">
+			<button class="btn">Submit</button>
+			<!-- Login with Google -->
+			<!-- Login with Facebook -->
+		</div>
+
+		<!-- Register user modal general page-->
+		<div id="modal-register-general" class="hidden">
+			Log in with Google or Facebook
+			<br>
+			<!-- Google register -->
+			<!-- Facebook register -->
+			<br>
+			<a href="waves-effect waves-light btn" href="#modal-register-chattify">Or create an account with Chattify</a>
+		</div>
+
+		<!-- Chattify-specific registration modal -->
+		<div id="modal-register-chattify" class="hidden">
+			Email:
+			<input type="email" name="" value="" placeholder="">
+			Password:
+			<input type="text" name="" value="" placeholder="">
+			<button class="btn">Submit</button>
+		</div>
+	</div>
+
 </body>
 </html>
