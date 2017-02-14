@@ -27,15 +27,14 @@ var result = '';
 //check for Enter press, and if so we pass the search string to
 //the API. When it returns, we perform a second search for the poster
 //and the user data, which influences how we display the search results
-$("#title-search").on("keyup", (event) =>
-{
+$("#title-search").on("keyup", (event) => {
 	if(event.which === 13)
 	{
 		console.log('13');
-		 Omdb.searchOMDB().then( (data) =>
-	 	{
-	 		console.log(data);
-	 	});
+	 	Omdb.getPoster()
+		.then( (data) => {
+		 	console.log(data);
+		});
 	}
 });
 

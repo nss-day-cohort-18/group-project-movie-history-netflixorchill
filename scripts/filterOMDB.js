@@ -4,7 +4,8 @@
 //***********************************
 //Object to hold multipule functions
 //***********************************
-let Omdb = {};
+var key = 'b473a36';
+let Omdb = {key};
 
 
 //*********
@@ -12,25 +13,35 @@ let Omdb = {};
 //*********
 
 //Get input value from Search bar and send the search string
-//to
+//to OMDB
 Omdb.searchOMDB = function(resolve, reject){
 	let titleSearch = $("#title-search").val();
-	return new Promise((resolve)=>{
-		$.ajax(
-		{
+	return new Promise( (resolve) => {
+		$.ajax({
 			method: 'GET',
 			url: `http://www.omdbapi.com/?r=json&s=${titleSearch}`
-		}).done( (data) =>
-		{
+		}).done( (data) => {
 			resolve(data);
-		}).reject((data)=>{
+		}).reject( (data) => {
 			console.log(titleSearch, data);
 		});
 	});
 };
 
-
-
+Omdb.getPoster = function(data)
+{
+	return new Promise( (resolve, reject) => {
+		var id = data.id;
+		$.ajax({
+			method: 'GET',
+			url: `http://img.omdbapi.com/?i=${id}&apikey=${Omdb.key}`
+		}).done( (data) => {
+			resolve(data);
+		}).reject( (data) => {
+			console.log(data);
+		});
+	});
+};
 
 
 
