@@ -27,7 +27,6 @@ let Tmdb = require('./filterTMDB.js');
 $("#title-search").on("keyup", (event) => {
 	if(event.which === 13)
 	{
-		event.preventDefault();
 		console.log('13');
 		Tmdb.searchTMDB().then(function(data){
 			console.log(data);
