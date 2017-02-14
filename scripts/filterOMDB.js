@@ -16,19 +16,16 @@ let Omdb = {};
 Omdb.searchOMDB = function(resolve){
 	let titleSearch = $("#title-search").val();
 	return new Promise((resolve)=>{
-		$.ajax({
+		$.ajax(
+		{
 			method: 'GET',
 			url: `http://www.omdbapi.com/?r=json&s=${titleSearch}`
-		}).done((data)=>{
+		}).done( (data) =>
+		{
 			resolve(data);
 		});
 	});
 };
-
-Omdb.searchPoster = function()
-{
-	let
-}
 
 
 

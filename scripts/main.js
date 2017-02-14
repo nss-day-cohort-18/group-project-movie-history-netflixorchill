@@ -24,7 +24,9 @@ let Omdb = require('./filterOMDB.js');
 //***************
 
 //OMDb Search Button
-//check for Enter press, then we
+//check for Enter press, and if so we pass the search string to
+//the API. When it returns, we perform a second search for the poster
+//and the user data, which influences how we display the search results
 $("#title-search").on("keyup", (event) =>
 {
 	if(event.which === 13)
