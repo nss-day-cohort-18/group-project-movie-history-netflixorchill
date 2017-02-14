@@ -3,14 +3,16 @@
 <head>
 	<title>Chillify</title>
 	<link rel="stylesheet" href="dist/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<script src="dist/jquery.min.js"></script>
 	<script src="dist/js/materialize.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
 </head>
-<body>
+<body class="container">
 
   <div class="row">
-    <form class="col s10 offset-s1">
+    <form class="col s12">
       <div class="row valign-wrapper card-panel hoverable" id="search-form">
       <!-- Search bar -->
         <div class="input-field col s6">
@@ -25,12 +27,12 @@
   </div>
   <!-- Filters -->
   <div class="row">
-  	<div class="col s10 offset-s1">
+  	<div class="col s12">
   		<h2>Movie History > </h2><h2 id="search-header" class="hide">Search Results</h2><h2 id="unwatched-header" class="hide">Unwatched</h2><h2 id="watched-header" class="hide">Watched</h2><h2 id="favorites-header" class="hide">Favorites</h2>
   	</div>
   </div>
   <div class="row">
-  	<div class="col s10 offset-s1">
+  	<div class="col s12">
 	  <a class="waves-effect waves-light btn">Show Untracked</a>
 	  <a class="waves-effect waves-light btn">Show unwatched</a>
 	  <a class="waves-effect waves-light btn">Show Watched</a>
@@ -43,7 +45,7 @@
 
 		<!-- Login user modal -->
 	<div id="modal-login" class="modal">
-	    <div class="modal-content">
+	  <div class="modal-content">
 	      <h4>Login Here:</h4>
 	      <div class="row">
 		    <form class="col s12">
@@ -54,10 +56,11 @@
 		        </div>
 		      </div>
 		       <div class="row">
-		        <div class="input-field col s12">
-		          <input id="password" type="password" class="validate">
-		          <label for="password">Password</label>
-		        </div>
+		         <div class="input-field col s12">
+		           <input id="password" type="password" class="validate">
+		           <label for="password">Password</label>
+		         </div>
+		       </div>
 		    </form>
 		  </div>
 	    </div>
@@ -65,8 +68,6 @@
 	      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
 	    </div>
 	</div>
-
-
 
 		<!-- Chattify-specific registration modal -->
 		<div id="modal-register-chattify" class="modal">
@@ -77,6 +78,16 @@
 			<button class="btn">Submit</button>
 		</div>
 	</div>
+
+
+
+			<!-- Print Cards Below -->
+
+
+	<div id="card-div" class="row">
+		
+	</div>
+
 	<script type="text/javascript" src="dist/app.js"></script>
 </body>
 </html>
