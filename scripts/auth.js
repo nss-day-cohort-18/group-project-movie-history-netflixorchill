@@ -1,47 +1,24 @@
 "use strict";
+let firebase = require("./firebaseConfig");
+	provider = new firebase.auth.GoogleAuthProvider(),
+	currentUser = null;
 
-
-//***********************************
-//Object to hold multipule functions
-//***********************************
-
-let FbAPI = {};
-
-
-//*********
-//Functions
-//*********
-
-//Get Method//
-
- 	FbAPI.getUser = (function(apiKeys, uid){
-	return new Promise((resolve, reject) => {
-		$.ajax({
-			method: 'GET',
-			url: `${apiKeys.database.URL}/users.json?orderBy="uid"&equalTo="${uid}`
-		}).then((response) => {
-			let users = [];
-			Object.keys(response).forEach(function(key){
-				response[key].id = key;
-				users.push(response[key]);
-			});
-			resolve(users[0]);
-		}, (error) => {
-			reject(error);
-		});
-
-	});
+firebase.auth().onAuthStateChanged( function(user){
+	if (user) {
+		console.log("currentUser logged in", currentUser);
+		currentUser = user.uid;
+	} else {
+		currentUser = null;
+		console.log("currentUser not logged in");
+	}
 });
 
-//post Method//
-FbAPI.addUser = (function (apiKeys, newUser){
-	return new Promise((resolve, reject) => {
-		$.ajax({
-			method: 'POST',
-			url: `${apiKeys.databaseURL}/users.json`,
-		})
-	});
-});
+function logInGoogle() {
+	return firebase.auth().signInWithPopup(provider);
+}
 
+function logOut(){
+	return firebase.auth().signOut();
+}
 
-module.exports = FbAPI;
+module.exports = logInGoogle;
