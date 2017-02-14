@@ -17,7 +17,7 @@ let Omdb = require('./filterOMDB.js');
 
 
 
-
+var result = '';
 
 //***************
 //EventListeners

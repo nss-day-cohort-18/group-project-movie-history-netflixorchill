@@ -13,7 +13,7 @@ let Omdb = {};
 
 //Get input value from Search bar and send the search string
 //to
-Omdb.searchOMDB = function(resolve){
+Omdb.searchOMDB = function(resolve, reject){
 	let titleSearch = $("#title-search").val();
 	return new Promise((resolve)=>{
 		$.ajax(
@@ -23,6 +23,8 @@ Omdb.searchOMDB = function(resolve){
 		}).done( (data) =>
 		{
 			resolve(data);
+		}).reject((data)=>{
+			console.log(titleSearch, data);
 		});
 	});
 };
