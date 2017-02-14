@@ -14,7 +14,7 @@
 //*******************
 let Tmdb = require('./filterTMDB.js');
 
-console.log(Tmdb);
+
 
 //***************
 //EventListeners
@@ -27,11 +27,14 @@ console.log(Tmdb);
 $("#title-search").on("keyup", (event) => {
 	if(event.which === 13)
 	{
+		event.preventDefault();
 		console.log('13');
-		Tmdb.searchTMDB()
-		.then(
-	 		Tmdb.getPosters()
-		);
+		Tmdb.searchTMDB().then(function(data){
+			console.log(data);
+		});
+		// .then(
+	 // 		Tmdb.getPosters()
+		// );
 	// 	.then( Tmdb.fillCards());
 	}
 });
