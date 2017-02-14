@@ -4,7 +4,7 @@
   $(document).ready(function(){
     $('.modal').modal();
   });
-       
+
 
 
 
@@ -24,9 +24,19 @@ let Omdb = require('./filterOMDB.js');
 //***************
 
 //OMDb Search Button
-$("#submit-omdb").click(Omdb.searchOMDB().then(function(data){
-	console.log(data);
-}));
+//check for Enter press, then we
+$("#title-search").on("keyup", (event) =>
+{
+	if(event.which === 13)
+	{
+		console.log('13');
+		 Omdb.searchOMDB().then( (data) =>
+	 	{
+	 		console.log(data);
+	 	});
+	}
+});
+
 
 
 
