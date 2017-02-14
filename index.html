@@ -3,6 +3,7 @@
 <head>
 	<title>Chillify</title>
 	<link rel="stylesheet" href="dist/css/materialize.min.css">
+	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<script src="dist/jquery.min.js"></script>
 	<script src="dist/js/materialize.min.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
@@ -12,56 +13,62 @@
 	<!-- Here is the navbar. -->
 	<!-- We use Materialize modals for the navlinks. The <a>Links</a> serve
 	as triggers for the modals. -->
-	<nav>
-	    <div class="nav-wrapper">
-			<a href="#" class="brand-logo">Logo</a>
-			<ul id="nav-mobile" class="right hide-on-med-and-down">
-				<li><a class="waves-effect waves-light btn" href="#modal-find-omdb-movies">Find a chill movie</a></li>
-				<li><a class="waves-effect waves-light btn" href="#modal-search-own-movies">Search my chill movies</a></li>
-				<li><a href="waves-effect waves-light btn" href="#modal-login">Login</a></li>
-				<li><a href="waves-effect waves-light btn" href="#modal-register-general">Register</a></li>
-			</ul>
-	    </div>
-	</nav>
-
+  <div class="row">
+    <form class="col s10 offset-s1">
+      <div class="row valign-wrapper card-panel hoverable" id="search-form">
+        <div class="input-field col s6">
+          <input id="title-search" type="text" class="validate">
+          <label for="title-search">Search</label>
+        </div>
+        <div class="col s6">
+          <button id="auth-button" type="button" class="btn waves-effect waves-light right valign" data-target="modal-login">Login/Register</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+  	<div class="col s10 offset-s1">
+  		<h2>Movie History > </h2><h2 id="search-header" class="hide">Search Results</h2><h2 id="unwatched-header" class="hide">Unwatched</h2><h2 id="watched-header" class="hide">Watched</h2><h2 id="favorites-header" class="hide">Favorites</h2> 
+  	</div>
+  </div>
+  <div class="row">
+  	<div class="col s10 offset-s1">
+	  <a class="waves-effect waves-light btn">Show Untracked</a>
+	  <a class="waves-effect waves-light btn">Show unwatched</a>
+	  <a class="waves-effect waves-light btn">Show Watched</a>
+	  <a class="waves-effect waves-light btn">Favorites</a>
+	</div>
+  </div>
 	<!-- Here is where we define all of our modals. -->
 	<div>
 
-		<!-- OMDB api call modal -->
-		<div id="modal-find-omdb-movies" class="modal">
-			Title:
-			<input type="text" name="" value="" placeholder="required">
-			Year:
-			<input type="text" name="" value="" placeholder="optional">
-			<button class="btn">Submit</button>
-		</div>
-
-		<!-- Firebase call modal -->
-		<div id="modal-search-own-movies" class="modal">
-
-		</div>
-
 		<!-- Login user modal -->
-		<div id="modal-login" class="modal">
-			Email:
-			<input type="email" name="" value="" placeholder="">
-			Password:
-			<input type="text" name="" value="" placeholder="">
-			<button class="btn">Submit</button>
-			<!-- Login with Google -->
-			<!-- Login with Facebook -->
-		</div>
+	<div id="modal-login" class="modal">
+	    <div class="modal-content">
+	      <h4>Login Here:</h4>
+	      <div class="row">
+		    <form class="col s12">
+		      <div class="row">
+		        <div class="input-field col s12">
+		          <input id="email" type="email" class="validate">
+		          <label for="email" data-error="wrong" data-success="right">Email</label>
+		        </div>
+		      </div>
+		       <div class="row">
+		        <div class="input-field col s12">
+		          <input id="password" type="password" class="validate">
+		          <label for="password">Password</label>
+		        </div>
+		    </form>
+		  </div>
+	    </div>
+	    <div class="modal-footer">
+	      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
+	    </div>
+	</div>
 
-		<!-- Register user modal general page-->
-		<div id="modal-register-general" class="modal">
-			Log in with Google or Facebook
-			<br>
-			<!-- Google register -->
-			<!-- Facebook register -->
-			<br>
-			<a href="waves-effect waves-light btn" href="#modal-register-chattify">Or create an account with Chattify</a>
-		</div>
 
+	
 		<!-- Chattify-specific registration modal -->
 		<div id="modal-register-chattify" class="modal">
 			Email:
@@ -71,6 +78,6 @@
 			<button class="btn">Submit</button>
 		</div>
 	</div>
-
+	<script type="text/javascript" src="dist/app.js"></script>
 </body>
 </html>
