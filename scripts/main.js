@@ -6,13 +6,16 @@
 let db = require("./db-interaction"),
 	// templates = require("./db-interatction"),
 	Omdb = require('./filterOMDB.js'),
-	user = require("./user");
-	user.logOut();
+	user = require("./user"),
+	config = require("./AppConstants.js");
 
+firebase.initializeApp(config);
 
   $(document).ready(function(){
     $('.modal').modal();
   });
+
+
        
 
 // REST API///
