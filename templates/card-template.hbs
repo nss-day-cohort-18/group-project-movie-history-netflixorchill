@@ -1,11 +1,12 @@
 {{#each results}}
-	<div class="card">
+  <div value="{{id}}" class="col s4 card-fixed">
+	<div class="card hoverable">
 	  <div class="card-image waves-effect waves-block waves-light">
 	    <img class="activator" src="https://image.tmdb.org/t/p/w500{{poster_path}}">
 	  </div>
 	  <div class="card-content">
-	      <span class="card-title activator grey-text text-darken-4">{{title}}<i class="material-icons right">more_vert</i></span>
-	      <p>{{release_date}}</p>
+	      <span class="card-title activator grey-text text-darken-4 truncate"><i class="material-icons more-info">info</i>{{title}}</span>
+	      <p>Release Date: {{release_date}}</p>
 	  </div>
 	  <div class="card-reveal">
 	  	<span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
@@ -13,7 +14,8 @@
 		<br>
 		<p>Plot:  {{overview}}</p>
 		<article id="actor-reveal"></article>
-		<a class="btn-floating halfway-fab waves-effect waves-light red">add</a>
 	  </div>
 	</div>
+	<button type="button" class="btn btn-flat waves-effect waves-yellow add-movie">Add to Watch List</button>
+  </div>
 {{/each}}

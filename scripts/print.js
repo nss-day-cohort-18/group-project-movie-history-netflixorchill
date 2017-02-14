@@ -9,7 +9,9 @@ Print.tmdbPrint = function(data){
 	$("#card-div").append(newDiv);
 };
 
-
+Print.tmdbClear = function(){
+	$("#card-div").empty();
+};
 
 
 
