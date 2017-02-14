@@ -1,19 +1,18 @@
 "use strict";
 
-
+//*******************
+// Initialize Modals
+//*******************
   $(document).ready(function(){
     $('.modal').modal();
   });
        
 
-
-
-
 //*******************
 // Require Variables
 //*******************
 let Omdb = require('./filterOMDB.js');
-
+let Print = require('./print.js');
 
 
 
