@@ -7,7 +7,6 @@ let db = require("./db-interaction.js"),
 	firebase = require('./firebaseConfig.js'),
 	Tmdb = require('./filterTMDB.js'),
 	user = require("./user.js"),
-	// config = require("./AppConstants.js"),
 	Print = require('./print.js'),
 	Events = require('./events.js');
 
@@ -25,7 +24,7 @@ let db = require("./db-interaction.js"),
 function loadMoviesToDOM() {
 	let currentUser = user.getUser();
 	db.getMovies(currentUser)
-	.then(function(movieData){
+	.then( function(movieData){
 		console.log("get data", movieData);
 		var idArray = Object.keys(movieData);
 		idArray.forEach(function(key){
@@ -36,6 +35,7 @@ function loadMoviesToDOM() {
 	});
 }
 
+// Login/Logout Listeners
 $('#login-btn').click(function() {
   console.log('clicked login');
   user.logInGoogle()
@@ -43,10 +43,15 @@ $('#login-btn').click(function() {
     console.log('result from login', result.user.uid);
     user.setUser(result.user.uid);
     // $('#auth-btn').addClass('is-hidden');
-    // $('#logout=btn').removeClass('is-hidden');
+    // $('#logout-btn').removeClass('is-hidden');
     loadMoviesToDOM();
   });
 });
+
+$('#logout-btn').click(function() {
+  console.log('clicked logout');
+  user.logOut();
+ });
 
 
 
