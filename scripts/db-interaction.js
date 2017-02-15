@@ -7,7 +7,6 @@
 // DB interaction using Firebase REST API
 // ****************************************
 
- let firebase = require('./firebaseConfig');
 
 function getMovies(user) {
 	return new Promise (function(resolve, reject) {

@@ -3,15 +3,10 @@
 //*******************
 // Require Variables
 //*******************
-let db = require("./db-interaction.js"),
-	firebase = require('./firebaseConfig.js'),
-	Tmdb = require('./filterTMDB.js'),
-	user = require("./user.js"),
-	// config = require("./AppConstants.js"),
-	Print = require('./print.js'),
-	Events = require('./events.js');
-
-	// firebase.initializeApp(config);
+let firebase = 	require('./firebase/firebaseConfig.js'),
+	user = 		require("./firebase/user.js"),
+	db = 		require("./db-interaction.js"),
+	Tmdb = 		require('./filterTMDB.js');
 
 //*******************
 // Initialize Modals
@@ -21,12 +16,11 @@ let db = require("./db-interaction.js"),
   });
 
 // REST API///
-
-function loadMoviesToDOM() {
+function loadMoviesToDom() {
 	let currentUser = user.getUser();
 	db.getMovies(currentUser)
 	.then(function(movieData){
-		console.log("get data", movieData);
+		// console.log("get data", movieData);
 		var idArray = Object.keys(movieData);
 		idArray.forEach(function(key){
 			movieData[key].id = key;
@@ -40,17 +34,30 @@ $('#login-btn').click(function() {
   console.log('clicked login');
   user.logInGoogle()
   .then( function(result){
-    console.log('result from login', result.user.uid);
+    // console.log('result from login', result.user.uid);
     user.setUser(result.user.uid);
     // $('#auth-btn').addClass('is-hidden');
     // $('#logout=btn').removeClass('is-hidden');
-    loadMoviesToDOM();
+    loadMoviesToDom();
   });
 });
 
 
+/* Search from bar and do title search */
+$("#title-search").on("keyup", (event) => {
+	if(event.which === 13)
+	{
+		Tmdb.searchTMDB().then(function(data){
+			$("#title-search").val("");
+			Tmdb.tmdbClear();
+			Tmdb.tmdbPrint(data);
+			Tmdb.addCardListeners();
+		});
+	}
+});
 
-// loadMoviesTODOM();
+module.exports = loadMoviesToDom;
+
 
 // Send newMovie data to the database and then reload the DOM with updated movie data
 
@@ -105,17 +112,7 @@ $('#login-btn').click(function() {
 //check for Enter press, and if so we pass the search string to
 //the API. When it returns, we perform a second search for the poster
 //and the user data, which influences how we display the search results
-$("#title-search").on("keyup", (event) => {
-	if(event.which == 13)
-	{
-		Tmdb.searchTMDB().then(function(data){
-			$("#title-search").val("");
-			Print.tmdbClear();
-			Print.tmdbPrint(data);
-			Events.addCardListeners();
-		});
-	}
-});
+
 
 
 

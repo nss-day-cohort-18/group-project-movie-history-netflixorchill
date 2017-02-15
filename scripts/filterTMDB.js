@@ -1,22 +1,13 @@
 "use strict";
 
+let cardTemplate = require("../templates/card-template.hbs");
+let key = '2065b4d356548d79a5905b6401847709';
+let Tmdb = {};
+let db = require("./db-interaction.js");
+let user = require('./firebase/user.js');
+let main = require("./main.js");
 
-//***********************************
-//Tmdb API namespace initialization
-//***********************************
-let 	key = '2065b4d356548d79a5905b6401847709';		
-let   Tmdb = {};
-
-
-//*********
-//Functions
-//*********
-
-//Getter and setter for when our object properties are private
-
-
-//Get input value from Search bar and send the search string
-//to Tmdb
+/* Search TMDB Database */
 Tmdb.searchTMDB = function(){
 	let titleSearch = $("#title-search").val();
 	return new Promise( (resolve, reject) => {
@@ -29,29 +20,58 @@ Tmdb.searchTMDB = function(){
 	});
 };
 
-
-
-Tmdb.findTMDB = function(){
-	// let id = event.target.val();
-	console.log("it works");
+/* Print each Card to Dom using HandleBars */
+Tmdb.tmdbPrint = function(data){
+	console.log(data);
+	let newDiv = document.createElement("div");
+	newDiv.innerHTML = cardTemplate(data);
+	$("#card-div").append(newDiv);
 };
 
-//In getPosters() we apply the data results to the global Tmdb object
-//and set the image url paths. 'this.result' is an object, while
-//'this.posterURLs' is an array.
-// Tmdb.getPosters = function(data)
-// {
-// 	console.log(data);
-// 	this.data = data;
-// 	for(var i = 0; i < this.result.length; i++)
-// 	{
-// 		this.posterURLs[i] = this.imagePrefix + this.result[i];
-// 	}
-// 	console.log(this.posterURLs);
-// };
+/* Clear each Card Every Search */
+Tmdb.tmdbClear = function(){
+	$("#card-div").empty();
+};
 
+/* Add event Listener to Each Card */
+Tmdb.addCardListeners = function () {
+	// $(".card-fixed").click(Tmdb.findTMDB);
+	$(".add-movie").click(Tmdb.findTMDB);
+};
 
+let titleGrab;
+let yearGrab;
+let plotGrab;
 
+/* Find ID to add to DB for each Card */
+Tmdb.findTMDB = function() {
+	let divID = $(event.target).closest('div').attr('id').slice(5);
 
+	let titleString = "title--" + divID;
+	let yearString = "year--" + divID;
+	let plotString = "plot--" + divID;
+
+ 	titleGrab = $("#" + titleString).text();
+ 	yearGrab = $("#" + yearString).text();
+ 	plotGrab = $("#" + plotString).text();
+
+  	let movieObj = Tmdb.buildMovieObj();
+  	db.addMovie(movieObj);
+  /*	.then( function(movieId){
+		console.log(movieId);
+	main.loadMoviesToDom(); 
+  	}); */
+
+};
+
+Tmdb.buildMovieObj = function() {
+    let movieObj = {
+      title: titleGrab,
+      release_date: yearGrab,
+      overview: plotGrab,
+      uid: user.getUser()
+  };
+  return movieObj;
+};
 
 module.exports = Tmdb;
