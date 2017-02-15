@@ -3,20 +3,20 @@
 //*******************
 // Require Variables
 //*******************
-let db = require("./db-interaction"),
-	// templates = require("./db-interatction"),
+let db = require("./db-interaction.js"),
+	firebase = require('./firebaseConfig.js'),
 	Tmdb = require('./filterTMDB.js'),
-	user = require("./user"),
-	config = require("./AppConstants.js"),
+	user = require("./user.js"),
+	// config = require("./AppConstants.js"),
 	Print = require('./print.js'),
 	Events = require('./events.js');
 
-firebase.initializeApp(config);
+	// firebase.initializeApp(config);
 
 //*******************
 // Initialize Modals
 //*******************
-  $(document).ready(function(){
+ $(document).ready(function(){
     $('.modal').modal();
   });
 
@@ -35,6 +35,20 @@ function loadMoviesToDOM() {
 		// templates.makeMovieList(movieData);
 	});
 }
+
+$('#login-btn').click(function() {
+  console.log('clicked login');
+  user.logInGoogle()
+  .then( function(result){
+    console.log('result from login', result.user.uid);
+    user.setUser(result.user.uid);
+    // $('#auth-btn').addClass('is-hidden');
+    // $('#logout=btn').removeClass('is-hidden');
+    loadMoviesToDOM();
+  });
+});
+
+
 
 // loadMoviesTODOM();
 

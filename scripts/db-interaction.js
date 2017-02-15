@@ -7,10 +7,12 @@
 // DB interaction using Firebase REST API
 // ****************************************
 
+ let firebase = require('./firebaseConfig');
+
 function getMovies(user) {
 	return new Promise (function(resolve, reject) {
 		$.ajax({
-			url: `https://moviehistory-e4b18.firebaseio.com/songs.json?orderBy="uid"&equalTo="${user}"`
+			url: `https://moviehistory-e4b18.firebaseio.com/movies.json?orderBy="uid"&equalTo="${user}"`
 		}).done(function(movieData){
 			resolve(movieData);
 		}).fail( function(error){

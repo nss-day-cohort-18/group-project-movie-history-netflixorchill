@@ -1,6 +1,7 @@
 "use strict";
 
-let provider = new firebase.auth.GoogleAuthProvider(),
+	let firebase = require('./firebaseConfig'),
+	provider = new firebase.auth.GoogleAuthProvider(),
 	currentUser = null;
 
 firebase.auth().onAuthStateChanged( function(user){
