@@ -4,7 +4,7 @@
 //***********************************
 //Tmdb API namespace initialization
 //***********************************
-let 	key = 'ef211d0a57225ce857a7822b3a8ed69f';
+let 	key = '2065b4d356548d79a5905b6401847709';		
 let   Tmdb = {};
 
 

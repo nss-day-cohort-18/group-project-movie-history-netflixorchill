@@ -10,7 +10,7 @@
 function getMovies(user) {
 	return new Promise (function(resolve, reject) {
 		$.ajax({
-			url: `https://musichistoryhelanan.firebaseio.com/songs.json?orderBy="uid"&equalTo="${user}"`
+			url: `https://moviehistory-e4b18.firebaseio.com/songs.json?orderBy="uid"&equalTo="${user}"`
 		}).done(function(movieData){
 			resolve(movieData);
 		}).fail( function(error){
@@ -23,7 +23,7 @@ function addMovie(movieListObject) {
 	console.log("addMovie", movieListObject);
 	return new Promise ( function(resolve, reject){
 		$.ajax({
-			url: 'https://netflixorchill-ea086.firebaseio.com/movies.json',
+			url: 'https://moviehistory-e4b18.firebaseio.com/movies.json',
 			type: 'POST',
 			data: JSON.stringify(movieListObject),
 			dataType: 'json'
@@ -36,7 +36,7 @@ function addMovie(movieListObject) {
 function deleteMovie(movieId) {
 	return new Promise( function(resolve, reject){
 		$.ajax({
-			url: `https://netflixorchill-ea086.firebaseio.com/movies/${movieId}.json`,
+			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`,
 			method: 'DELETE'
 		}).done( function(){
 			resolve();
@@ -47,7 +47,7 @@ function deleteMovie(movieId) {
 function getMovie(movieId) {
 	return new Promise( function(resolve, reject){
 		$.ajax({
-			url: `https://netflixorchill-ea086.firebaseio.com/movies/${movieId}.json`
+			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`
 		}).done( function(movieData){
 			resolve(movieData);
 		}).fail( function(error){
@@ -60,7 +60,7 @@ function getMovie(movieId) {
 function editMovie( movieListObject, movieId) {
 	return new Promise( function(resolve, reject){
 		$.ajax({
-			url: `https://netflixorchill-ea086.firebaseio.com/movies/${movieId}.json`,
+			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`,
 			type: 'PUT',
 			data: JSON.stringify(movieListObject)
 		}).done( function(data){
