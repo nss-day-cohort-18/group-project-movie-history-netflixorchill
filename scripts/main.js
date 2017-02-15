@@ -7,10 +7,12 @@ let db = require("./db-interaction"),
 	// templates = require("./db-interatction"),
 	Tmdb = require('./filterTMDB.js'),
 	user = require("./user"),
-	config = require("./AppConstants.js");
+	config = require("./AppConstants.js"),
+	Print = require('./print.js'),
+	Events = require('./events.js');
 
 firebase.initializeApp(config);
-=======
+
 //*******************
 // Initialize Modals
 //*******************
