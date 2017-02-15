@@ -10,7 +10,7 @@ let db = require("./db-interaction"),
 	config = require("./AppConstants.js");
 
 firebase.initializeApp(config);
-=======
+
 //*******************
 // Initialize Modals
 //*******************
