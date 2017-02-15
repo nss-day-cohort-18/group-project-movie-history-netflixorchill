@@ -22,10 +22,14 @@ Tmdb.searchTMDB = function(){
 
 /* Print each Card to Dom using HandleBars */
 Tmdb.tmdbPrint = function(data){
-	console.log(data);
+	
+	console.log("this is called", data);
+
 	let newDiv = document.createElement("div");
 	newDiv.innerHTML = cardTemplate(data);
 	$("#card-div").append(newDiv);
+	$(".add-movie").click(Tmdb.findTMDB);
+
 };
 
 /* Clear each Card Every Search */
@@ -33,19 +37,15 @@ Tmdb.tmdbClear = function(){
 	$("#card-div").empty();
 };
 
-/* Add event Listener to Each Card */
-Tmdb.addCardListeners = function () {
-	// $(".card-fixed").click(Tmdb.findTMDB);
-	$(".add-movie").click(Tmdb.findTMDB);
-};
-
+let divID;
 let titleGrab;
 let yearGrab;
 let plotGrab;
+let posterPath; 
 
 /* Find ID to add to DB for each Card */
 Tmdb.findTMDB = function() {
-	let divID = $(event.target).closest('div').attr('id').slice(5);
+	divID = $(event.target).closest('div').attr('id').slice(5);
 
 	let titleString = "title--" + divID;
 	let yearString = "year--" + divID;
@@ -56,16 +56,17 @@ Tmdb.findTMDB = function() {
  	plotGrab = $("#" + plotString).text();
 
   	let movieObj = Tmdb.buildMovieObj();
-  	db.addMovie(movieObj);
-  /*	.then( function(movieId){
-		console.log(movieId);
-	main.loadMoviesToDom(); 
-  	}); */
+  	db.addMovie(movieObj).then( function(movieId)
+  	{
+		console.log("Adding Movie with ID Firebase ID: ", movieId);
+  	});
 
 };
 
+
 Tmdb.buildMovieObj = function() {
     let movieObj = {
+      id: divID,
       title: titleGrab,
       release_date: yearGrab,
       overview: plotGrab,

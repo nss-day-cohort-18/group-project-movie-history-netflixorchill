@@ -11,8 +11,9 @@
 function getMovies(user) {
 	return new Promise (function(resolve, reject) {
 		$.ajax({
-			url: `https://moviehistory-e4b18.firebaseio.com/movies.json?orderBy="uid"&equalTo="${user}"`
+			url: `https://moviehistory-e4b18.firebaseio.com/movies.json`
 		}).done(function(movieData){
+			console.log("this this done?", movieData);
 			resolve(movieData);
 		}).fail( function(error){
 			reject(error);
@@ -21,7 +22,7 @@ function getMovies(user) {
 }
 
 function addMovie(movieListObject) {
-	console.log("addMovie", movieListObject);
+	console.log("Adding Movie to Firebase: ", movieListObject);
 	return new Promise ( function(resolve, reject){
 		$.ajax({
 			url: 'https://moviehistory-e4b18.firebaseio.com/movies.json',
