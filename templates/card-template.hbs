@@ -1,21 +1,32 @@
 {{#each results}}
-  <div value="{{id}}" class="col s4 card-fixed">
+
+  <div id="div--{{id}}" class="col s4 card-fixed">
+
 	<div class="card hoverable">
+	   <!-- card image -->
 	  <div class="card-image waves-effect waves-block waves-light">
-	    <img class="activator" src="https://image.tmdb.org/t/p/w500{{poster_path}}">
+	    <img class="activator" src="https://image.tmdb.org/t/p/w500{{poster_path}}" id="img--{{id}}">
 	  </div>
-	  <div class="card-content">
-	      <span class="card-title activator grey-text text-darken-4 truncate"><i class="material-icons more-info">info</i>{{title}}</span>
-	      <p>Release Date: {{release_date}}</p>
-	  </div>
-	  <div class="card-reveal">
+
+	  <! -- small data below image -->
+		<div class="card-content">
+          <span class="card-title activator grey-text text-darken-4 truncate" id="title--{{id}}">{{title}}</span>
+          <p>Release Date: {{release_date}}</p>
+      </div>
+
+	  <!-- long data when card clicked -->
+	<div class="card-reveal">
 	  	<span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
-		<p>Year: {{release_date}}</p>
+		<p id="year--{{id}}">Year: {{release_date}}</p>
 		<br>
-		<p>Plot:  {{overview}}</p>
-		<article id="actor-reveal"></article>
+		<p id="plot--{{id}}">Plot: {{overview}}</p>
+
 	  </div>
+
 	</div>
-	<button type="button" class="btn btn-flat waves-effect waves-yellow add-movie">Add to Watch List</button>
+
+	<button type="button" class="btn btn-flat waves-effect waves-yellow add-movie" id="button--{{id}}">Add to Watch List</button>
+
   </div>
+
 {{/each}}

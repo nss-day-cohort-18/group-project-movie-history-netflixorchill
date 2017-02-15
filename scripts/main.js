@@ -1,44 +1,79 @@
 "use strict";
 
 //*******************
+// Require Variables
+//*******************
+let firebase = 	require('./firebase/firebaseConfig.js'),
+	user = 		require("./firebase/user.js"),
+	db = 		require("./db-interaction.js"),
+	Tmdb = 		require('./filterTMDB.js');
+
+
+//*******************
 // Initialize Modals
 //*******************
-  $(document).ready(function(){
+ $(document).ready(function(){
     $('.modal').modal();
   });
 
+// REST API///
+function loadMoviesToDom() {
+	let currentUser = user.getUser();
 
-//*******************
-// Require Variables
-//*******************
-let Tmdb = require('./filterTMDB.js');
-let Print = require('./print.js');
-let Events = require('./events.js');
+	db.getMovies(currentUser).then(function(movieData)
+	{
+		var idArray = Object.keys(movieData);
+		idArray.forEach(function(key)
+		{
+			movieData[key].prop = key; // grabbing google's Key
+		});
 
+		Tmdb.tmdbPrint(movieData);
+	});
+}
 
-//***************
-//EventListeners
-//***************
+// Login/Logout Listeners
+$('#login-btn').click(function() {
+  console.log('clicked login');
+  user.logInGoogle()
+  .then( function(result){
+    // console.log('result from login', result.user.uid);
+    user.setUser(result.user.uid);
+    // $('#auth-btn').addClass('is-hidden');
+    // $('#logout=btn').removeClass('is-hidden');
+    loadMoviesToDom();
+  });
+});
 
-//TMDb Search Button
-//check for Enter press, and if so we pass the search string to
-//the API. When it returns, we perform a second search for the poster
-//and the user data, which influences how we display the search results
+$('#logout-btn').click(function() {
+  console.log('clicked logout');
+  user.logOut();
+ });
+
+/* Search from bar and do title search */
 $("#title-search").on("keyup", (event) => {
-	if(event.which == 13)
+	if(event.which === 13)
 	{
 		Tmdb.searchTMDB().then(function(data){
 			$("#title-search").val("");
-			Print.tmdbClear();
-			Print.tmdbPrint(data);
-			Events.addCardListeners();
+			Tmdb.tmdbClear();
+			Tmdb.tmdbPrint(data);
+		//	Tmdb.addCardListeners();
 		});
 	}
 });
 
+module.exports = loadMoviesToDom;
 
-
-
+/*
+	$("#add-movie").click(function(){
+	console.log("added movie to list");
+	var movieForm = templates.movieForm()
+	.then(function(movieForm){
+		$("form--name").html(movieListForm);
+	});
+});
+*/
 
 
 
