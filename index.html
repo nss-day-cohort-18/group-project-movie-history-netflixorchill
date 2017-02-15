@@ -15,20 +15,27 @@
 </head>
 <body class="container">
 
-  <div class="row">
-    <form class="col s12">
-      <div class="row valign-wrapper card-panel hoverable" id="search-form">
-      <!-- Search bar -->
-        <div class="input-field col s6">
-          <input id="title-search" type="text">
-          <label for="title-search">Search</label>
-        </div>
-        <div class="col s6">
-          <button id="auth-button" type="button" class="btn waves-effect waves-light right valign" data-target="modal-login">Login/Register</button>
-        </div>
-      </div>
+	<div class="row">
+   	<form class="col s12">
+      	<div class="row valign-wrapper card-panel hoverable" id="search-form">
+
+<!-- Search bar -->
+	      	<div class="input-field col s8">
+	         	<input id="title-search" type="text">
+	         	<label for="title-search">Search</label>
+	      	</div>
+
+<!-- Login Btns -->
+	      	<div class="col s4">
+					<a id="login-btn" class="waves-effect waves-light btn" href="#" title="">Sign In</a>
+					<a id="logout-btn" class="waves-effect waves-light btn" href="#" title="">Sign Out</a>
+				</div>	
+
+      	</div>
     </form>
   </div>
+
+
   <!-- Filters -->
   <div class="row">
   	<div class="col s12">
@@ -40,49 +47,16 @@
 	  <a class="waves-effect waves-light btn">Show Untracked</a>
 	  <a class="waves-effect waves-light btn">Show unwatched</a>
 	  <a class="waves-effect waves-light btn">Show Watched</a>
-	  <a class="waves-effect waves-light btn">Favorites</a>
 	</div>
   </div>
 
 	<!-- Here is where we define all of our modals. -->
 	<div>
 
-		<!-- Login user modal -->
-	<div id="modal-login" class="modal">
-	  <div class="modal-content">
-	      <h4>Login Here:</h4>
-	      <div class="row">
-		    <form class="col s12">
-		      <div class="row">
-		        <div class="input-field col s12">
-		          <input id="email" type="email" class="validate">
-		          <label for="email" data-error="wrong" data-success="right">Email</label>
-		        </div>
-		      </div>
-		       <div class="row">
-		         <div class="input-field col s12">
-		       <!--    <input id="password" type="password" class="validate">
-		           <label for="password">Password</label> -->
-		           <li id="login-btn"><a href="#" title="">Sign In</a></li>
-		           <li>	|	</li>
-			       <li id="logout-btn"><a href="#" title="">Sign Out</a></li>
-		         </div>
-		       </div>
-		    </form>
-		  </div>
-	    </div>
-	    <div class="modal-footer">
-	      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Login</a>
-	    </div>
-	</div>
-
-		<!-- Chattify-specific registration modal -->
 		<div id="modal-register-chattify" class="modal">
-			Email:
-			<input type="email" name="" value="" placeholder="">
-			Password:
-			<input type="text" name="" value="" placeholder="">
-			<button class="btn">Submit</button>
+			<li id="login-btn"><a href="#" title="">Sign In</a></li>
+		   <li>	|	</li>
+			<li id="logout-btn"><a href="#" title="">Sign Out</a></li>
 		</div>
 	</div>
 

@@ -8,6 +8,7 @@ let firebase = 	require('./firebase/firebaseConfig.js'),
 	db = 		require("./db-interaction.js"),
 	Tmdb = 		require('./filterTMDB.js');
 
+
 //*******************
 // Initialize Modals
 //*******************
@@ -19,6 +20,7 @@ let firebase = 	require('./firebase/firebaseConfig.js'),
 function loadMoviesToDom() {
 	let currentUser = user.getUser();
 	db.getMovies(currentUser)
+
 	.then(function(movieData){
 		// console.log("get data", movieData);
 		var idArray = Object.keys(movieData);
@@ -30,6 +32,7 @@ function loadMoviesToDom() {
 	});
 }
 
+// Login/Logout Listeners
 $('#login-btn').click(function() {
   console.log('clicked login');
   user.logInGoogle()
@@ -41,6 +44,11 @@ $('#login-btn').click(function() {
     loadMoviesToDom();
   });
 });
+
+$('#logout-btn').click(function() {
+  console.log('clicked logout');
+  user.logOut();
+ });
 
 
 /* Search from bar and do title search */

@@ -16,7 +16,10 @@ img {
 .more-info {
   margin-right: 0; }
 
-.overflow {
-  overflow: scroll; }
+#login-btn,
+#logout-btn {
+	background-color: #1565c0;
+
+}  
 
 /*# sourceMappingURL=styles.css.map */
