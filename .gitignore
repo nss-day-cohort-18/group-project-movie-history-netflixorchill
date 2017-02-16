@@ -2,4 +2,5 @@ lib/node_modules/
 .DS_Store
 dist/
 lib/.sass_cache
-scripts/AppConstants.js
+scripts/apikey.js
+scripts/firebase/fb-getter.js
