@@ -27,8 +27,7 @@ function loadMoviesToDom() {
 
 // Login/Logout Listeners
 $('#login-btn').click(function() {
-	user.logInGoogle().then( function(result)
-  	{ 
+	user.logInGoogle().then( function(result) { 
   		user.setUser(result.user.uid);
   	});
   	loadMoviesToDom();
