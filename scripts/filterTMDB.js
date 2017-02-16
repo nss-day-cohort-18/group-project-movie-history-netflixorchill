@@ -1,57 +1,72 @@
 "use strict";
 
+let	Tmdb = {},
+	apikey = require('./apikey.js'),
+	cardTemplate = require("../templates/card-template.hbs"),
+	watchlistTemplate = require("../templates/watchlist.hbs"),
+	user = require('./firebase/user.js'),
+	db = require("./db-interaction.js"),
+	main = require("./main.js");
 
-//***********************************
-//Tmdb API namespace initialization
-//***********************************
-let 	key = 'ef211d0a57225ce857a7822b3a8ed69f';
-let   Tmdb = {};
-
-
-//*********
-//Functions
-//*********
-
-//Getter and setter for when our object properties are private
-
-
-//Get input value from Search bar and send the search string
-//to Tmdb
 Tmdb.searchTMDB = function(){
 	let titleSearch = $("#title-search").val();
 	return new Promise( (resolve, reject) => {
 		$.ajax({
 			method: 'GET',
-			url: `https://api.themoviedb.org/3/search/movie?query=${titleSearch}&api_key=${key}`
+			url: `https://api.themoviedb.org/3/search/movie?query=${titleSearch}&api_key=${apikey.apiKey}`
 		}).done( (data) => {
 			resolve(data);
 		});
 	});
 };
 
+/* 
+ * Display Movies on Login / Delete from Watch List
+ */
+Tmdb.watchedMovieList = function (data) {
+	let newDiv = document.createElement("div");
+	newDiv.innerHTML = watchlistTemplate(data);
+	$("#card-div").append(newDiv);
 
-
-Tmdb.findTMDB = function(){
-	// let id = event.target.val();
-	console.log("it works");
+	$(".remove-movie").click(function () {
+		let firebaseID = $(event.target).closest('div').attr('id').slice(5);
+		db.deleteMovieFromWatchList(firebaseID);
+	});
 };
 
-//In getPosters() we apply the data results to the global Tmdb object
-//and set the image url paths. 'this.result' is an object, while
-//'this.posterURLs' is an array.
-// Tmdb.getPosters = function(data)
-// {
-// 	console.log(data);
-// 	this.data = data;
-// 	for(var i = 0; i < this.result.length; i++)
-// 	{
-// 		this.posterURLs[i] = this.imagePrefix + this.result[i];
-// 	}
-// 	console.log(this.posterURLs);
-// };
+/*
+ * Show Movies from Search / Add to Watchlist
+ */
+Tmdb.tmdbPrint = function (data) {
+	let newDiv = document.createElement("div");
+	newDiv.innerHTML = cardTemplate(data);
+	$("#card-div").append(newDiv);
 
+	$(".add-movie").click(function () {
+		let divID = $(event.target).closest('div').attr('id').slice(5);
 
+		let titleString = "title--" + divID;
+		let yearString = "year--" + divID;
+		let plotString = "plot--" + divID;
+		let imgString = "img--" + divID;
 
+	 	let titleGrab = $("#" + titleString).text();
+	 	let yearGrab = $("#" + yearString).text();
+	 	let plotGrab = $("#" + plotString).text();
+	 	let imgGrab = $("#" + imgString).attr('src').slice(32);
+
+	    let movieObj = {
+	      id: divID,
+	      title: titleGrab,
+	      release_date: yearGrab,
+	      overview: plotGrab,
+	      imgpath: imgGrab,
+	      uid: user.getUser()
+	  	};
+
+	db.addMovieToWatchList(movieObj);
+	});
+};
 
 
 module.exports = Tmdb;
