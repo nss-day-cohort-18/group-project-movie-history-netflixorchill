@@ -34,7 +34,7 @@ function addMovie(movieListObject) {
 	});
 }
 
-function deleteMovie(movieId) {
+function deleteMovieFromWatchList (movieId) {
 	return new Promise( function(resolve, reject){
 		$.ajax({
 			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`,
@@ -74,6 +74,6 @@ module.exports = {
 	getMovies,
 	addMovie,
 	getMovie,
-	deleteMovie,
+	deleteMovieFromWatchList,
 	editMovie
 };

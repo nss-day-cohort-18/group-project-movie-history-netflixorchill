@@ -1,4 +1,4 @@
-<div id="div--{{id}}" class="col s4 card-fixed">
+<div id="div--{{firebasekey}}" class="col s4 card-fixed">
 
 	<div class="card hoverable">
 	   <!-- card image -->
@@ -9,20 +9,20 @@
 	  <! -- small data below image -->
 		<div class="card-content">
           <span class="card-title activator grey-text text-darken-4 truncate" id="title--{{id}}">{{title}}</span>
-          <p>Release Date: {{release_date}}</p>
+          <p>{{release_date}}</p>
       </div>
 
 	  <!-- long data when card clicked -->
 	<div class="card-reveal">
 	  	<span class="card-title grey-text text-darken-4">{{title}}<i class="material-icons right">close</i></span>
-		<p id="year--{{id}}">Year: {{release_date}}</p>
+		<p id="year--{{id}}">{{release_date}}</p>
 		<br>
-		<p id="plot--{{id}}">Plot: {{overview}}</p>
+		<p id="plot--{{id}}">{{overview}}</p>
 
 	  </div>
 
 	</div>
 
-	<button type="button" class="btn btn-flat waves-effect waves-yellow add-movie" id="remove--{{id}}">Remove from Watch List</button>
+	<button type="button" class="btn btn-flat waves-effect waves-yellow remove-movie" id="button--{{id}}">Remove from Watch List</button>
 
   </div>
