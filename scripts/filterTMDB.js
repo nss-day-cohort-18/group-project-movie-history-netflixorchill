@@ -21,59 +21,51 @@ Tmdb.searchTMDB = function(){
 };
 
 /* 
- * DISPLAYING MOVIES ON LOGIN
+ * Display Movies on Login / Delete from Watch List
  */
-Tmdb.watchedMovieList = function (data, key) {
-
+Tmdb.watchedMovieList = function (data) {
 	let newDiv = document.createElement("div");
 	newDiv.innerHTML = watchlistTemplate(data);
 	$("#card-div").append(newDiv);
 
-	console.log('tmdb watchlist rec. from loadmoviestoDom just the key ', key);
-	console.log('tmdb watchlist rec. from loadmoviestoDom the data ', data);
-	
-	$(".remove-movie").click(Tmdb.removeTMDB);
+	$(".remove-movie").click(function () {
+		let firebaseID = $(event.target).closest('div').attr('id').slice(5);
+		db.deleteMovieFromWatchList(firebaseID);
+	});
 };
 
 /*
- * ADDING MOVIES TO WATCH LIST - NOT DISPLAYING
+ * Show Movies from Search / Add to Watchlist
  */
 Tmdb.tmdbPrint = function (data) {
 	let newDiv = document.createElement("div");
 	newDiv.innerHTML = cardTemplate(data);
 	$("#card-div").append(newDiv);
-	// the below adds to watch list
-	$(".add-movie").click(Tmdb.findTMDB);
-};
 
-Tmdb.findTMDB = function() {
-	let divID = $(event.target).closest('div').attr('id').slice(5);
+	$(".add-movie").click(function () {
+		let divID = $(event.target).closest('div').attr('id').slice(5);
 
-	let titleString = "title--" + divID;
-	let yearString = "year--" + divID;
-	let plotString = "plot--" + divID;
-	let imgString = "img--" + divID;
+		let titleString = "title--" + divID;
+		let yearString = "year--" + divID;
+		let plotString = "plot--" + divID;
+		let imgString = "img--" + divID;
 
- 	let titleGrab = $("#" + titleString).text();
- 	let yearGrab = $("#" + yearString).text();
- 	let plotGrab = $("#" + plotString).text();
- 	let imgGrab = $("#" + imgString).attr('src').slice(32);
+	 	let titleGrab = $("#" + titleString).text();
+	 	let yearGrab = $("#" + yearString).text();
+	 	let plotGrab = $("#" + plotString).text();
+	 	let imgGrab = $("#" + imgString).attr('src').slice(32);
 
-    let movieObj = {
-      id: divID,
-      title: titleGrab,
-      release_date: yearGrab,
-      overview: plotGrab,
-      imgpath: imgGrab,
-      uid: user.getUser()
-  	};
+	    let movieObj = {
+	      id: divID,
+	      title: titleGrab,
+	      release_date: yearGrab,
+	      overview: plotGrab,
+	      imgpath: imgGrab,
+	      uid: user.getUser()
+	  	};
 
-  	db.addMovie(movieObj);
-};
-
-Tmdb.removeTMDB = function () {
-	let divID = $(event.target).closest('div').attr('id').slice(5);
-	db.deleteMovieFromWatchList(divID);
+	db.addMovieToWatchList(movieObj);
+	});
 };
 
 

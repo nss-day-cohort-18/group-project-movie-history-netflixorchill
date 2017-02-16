@@ -16,7 +16,8 @@
 <body class="container">
 
 	<div class="row">
-   	<form class="col s12">
+		<div class="col s12">
+   <!--	<form class="col s12"> -->
       	<div class="row valign-wrapper card-panel hoverable" id="search-form">
 
 <!-- Search bar -->
@@ -27,14 +28,15 @@
 
 <!-- Login Btns -->
 	      	<div class="col s4">
-					<a id="login-btn" class="waves-effect waves-light btn" href="#" title="">Sign In</a>
-					<a id="logout-btn" class="waves-effect waves-light btn" href="#" title="">Sign Out</a>
-				</div>	
+	      	<button type="button" class="waves-effect waves-light btn" id="login-btn">Sign In</button>
+			<button type="button" class="waves-effect waves-light btn" id="logout-btn">Sign Out</button>
+			<!--		<a id="login-btn" class="waves-effect waves-light btn" href="">Sign In</a>
+					<a id="logout-btn" class="waves-effect waves-light btn" href="">Sign Out</a> -->
+			</div>	
 
       	</div>
-    </form>
+    <!-- </form> -->
   </div>
-
 
   <!-- Filters -->
   <div class="row">
@@ -49,21 +51,6 @@
 	  <a class="waves-effect waves-light btn">Show Watched</a>
 	</div>
   </div>
-
-	<!-- Here is where we define all of our modals. -->
-	<div>
-
-		<div id="modal-register-chattify" class="modal">
-			<li id="login-btn"><a href="#" title="">Sign In</a></li>
-		   <li>	|	</li>
-			<li id="logout-btn"><a href="#" title="">Sign Out</a></li>
-		</div>
-	</div>
-
-
-
-			<!-- Print Cards Below -->
-
 
 	<div id="card-div" class="row">
 		
