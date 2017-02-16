@@ -7,7 +7,7 @@
 // DB interaction using Firebase REST API
 // ****************************************
 
-function getMovies (user) {
+function getMoviesOnWatchList (user) {
 	return new Promise (function(resolve, reject) {
 		$.ajax({
 			url: `https://moviehistory-e4b18.firebaseio.com/movies.json?orderBy="uid"&equalTo="${user}"`,
@@ -20,13 +20,13 @@ function getMovies (user) {
 	});
 }
 
-function addMovie(movieListObject) {
-	console.log("Adding Movie to Firebase: ", movieListObject);
+function addMovieToWatchList (movie) {
+	console.log("Adding Movie to Firebase: ", movie);
 	return new Promise ( function(resolve, reject){
 		$.ajax({
 			url: 'https://moviehistory-e4b18.firebaseio.com/movies.json',
 			type: 'POST',
-			data: JSON.stringify(movieListObject),
+			data: JSON.stringify(movie),
 			dataType: 'json'
 		}).done(function(movieId){
 			resolve(movieId);
@@ -45,35 +45,8 @@ function deleteMovieFromWatchList (movieId) {
 	});
 }
 
-function getMovie(movieId) {
-	return new Promise( function(resolve, reject){
-		$.ajax({
-			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`
-		}).done( function(movieData){
-			resolve(movieData);
-		}).fail( function(error){
-			reject(error);
-		});
-	});
-}
-
-
-function editMovie( movieListObject, movieId) {
-	return new Promise( function(resolve, reject){
-		$.ajax({
-			url: `https://moviehistory-e4b18.firebaseio.com/movies/${movieId}.json`,
-			type: 'PUT',
-			data: JSON.stringify(movieListObject)
-		}).done( function(data){
-			resolve(data);
-		});
-	});
-}
-
 module.exports = {
-	getMovies,
-	addMovie,
-	getMovie,
-	deleteMovieFromWatchList,
-	editMovie
+	getMoviesOnWatchList,
+	addMovieToWatchList,
+	deleteMovieFromWatchList
 };

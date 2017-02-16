@@ -7,18 +7,16 @@ let firebase = 	require('./firebase/firebaseConfig.js'),
 
 
  $(document).ready(function(){
-    $('.modal').modal();
     $("#title-search").prop('disabled', true);
+   	$('#logout-btn').hide();
+  	$('#login-btn').show();
   });
 
 // REST API///
 function loadMoviesToDom() {
 	let currentUser = user.getUser();
 
-	$("#title-search").val("");
-	$("#card-div").empty();
-
-	db.getMovies(currentUser)
+	db.getMoviesOnWatchList(currentUser)
 	.then(function(movieData)
 	{		
 		var idArray = Object.keys(movieData);
@@ -35,12 +33,24 @@ $('#login-btn').click(function() {
 	user.logInGoogle().then( function(result) { 
   		user.setUser(result.user.uid);
   	});
+
+	event.preventDefault();
+
+   	$("#title-search").val("");
+	$("#card-div").empty();
+ 
+  	$('#logout-btn').show();
+  	$('#login-btn').hide();
   	$("#title-search").prop('disabled', false);
 	$("#title-search").prop('enabled', true);
+
   	loadMoviesToDom();
 });
 
+
 $('#logout-btn').click(function() {
+
+	event.preventDefault();
 
 	$("#title-search").val("");
 	$("#card-div").empty();
